@@ -21,7 +21,7 @@ person.name = "Maisie"
 console.log(personCopy);
 console.log(newPerson);
 
-const nums = [1, 2, 3, 4];
+const nums = [1, 2, 3, 4, 5];
 const doubleNums = nums.map((num) => {
   return num * 2;
 });
