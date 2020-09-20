@@ -9,9 +9,6 @@ function App() {
       <p>This is really working</p>
       <Person></Person>
       <Person />
-      <Person />
-      <Person />
-      <Person />
     </div>
   );
 
