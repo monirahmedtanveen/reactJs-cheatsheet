@@ -1,0 +1,26 @@
+.UserOutput {
+    width: 60%;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
+    padding: 16px;
+    margin: 16px auto;
+    text-align: justify;
+}
+
+.UserInput {
+    width: 60%;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
+    padding: 16px;
+    margin: 16px auto;
+    text-align: justify;
+    font: inherit;
+}
+
+.FormControl {
+    width: 50%;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
+    margin: 16px auto;
+    padding: 16px;
+}
