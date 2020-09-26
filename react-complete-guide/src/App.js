@@ -20,8 +20,8 @@ class App extends Component {
   state = {
     person: [
       { name: "Monir Ahmed", age: 28 },
-      { name: "Kumu2.ewu", age: 28 },
-      { name: "Alamin Mia", age: 32 },
+      { name: "Menu", age: 28 },
+      { name: "Max Plank", age: 32 },
     ]
   }
 
@@ -31,8 +31,8 @@ class App extends Component {
     this.setState({
       person: [
         { name: newName, age: 28 },
-        { name: "Jannatun Kumu2.ewu", age: 28 },
-        { name: "Alamin Mia", age: 35 },
+        { name: "Maisie Williams", age: 28 },
+        { name: "Arya Stark", age: 35 },
       ]
     })
   }
@@ -77,7 +77,7 @@ class App extends Component {
           name={this.state.person[2].name} 
           age={this.state.person[2].age}
           click={this.switchNameHandler.bind(this, 'Reverted')}
-          change={this.nameChangeHandler}>My Hobbies: talking bullshit without any reason and selling properties for my feeding</Person>
+          change={this.nameChangeHandler}>Selling properties for my feeding</Person>
       </div>
     );
       
