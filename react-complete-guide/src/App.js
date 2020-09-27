@@ -22,7 +22,8 @@ class App extends Component {
       { name: "Monir Ahmed", age: 28 },
       { name: "Menu", age: 28 },
       { name: "Max Plank", age: 32 },
-    ]
+    ],
+    showPersons: false
   }
 
   switchNameHandler = (newName) => {
@@ -47,17 +48,23 @@ class App extends Component {
     })
   }
 
+  togglePersonHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons: !doesShow});
+  }
+
   render () {
     const styleTheButton = {
       backgroundColor: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      margin: '0 15px 0px'
     };
 
     const styleTheDiv = {
-      backgroundColor: '#ccc',
+      backgroundColor: '#fff',
       font: 'inherit'
     };
 
@@ -67,17 +74,27 @@ class App extends Component {
         <p>This is really working</p>
         <button style={styleTheButton}
           onClick={() => this.switchNameHandler('Hello World !!!!')}>Switch Name</button>
-        <Person 
-          name={this.state.person[0].name} 
-          age={this.state.person[0].age}></Person>
-        <Person 
-          name={this.state.person[1].name} 
-          age={this.state.person[1].age}></Person>
-        <Person 
-          name={this.state.person[2].name} 
-          age={this.state.person[2].age}
-          click={this.switchNameHandler.bind(this, 'Reverted')}
-          change={this.nameChangeHandler}>Selling properties for my feeding</Person>
+
+        <button style={styleTheButton} onClick={this.togglePersonHandler}>Show Div</button>
+
+        {
+          this.state.showPersons === true ?
+            <div>
+              <Person 
+                name={this.state.person[0].name} 
+                age={this.state.person[0].age}></Person>
+              <Person 
+                name={this.state.person[1].name} 
+                age={this.state.person[1].age}></Person>
+              <Person 
+                name={this.state.person[2].name} 
+                age={this.state.person[2].age}
+                click={this.switchNameHandler.bind(this, 'Reverted')}
+                change={this.nameChangeHandler}>Selling properties for my feeding</Person>
+            </div> : null
+        }
+          
+        
       </div>
     );
       
