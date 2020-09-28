@@ -1,6 +1,5 @@
 import React, { Component, useState } from 'react';
 import './App.css';
-import person from './Person/Person';
 import Person from './Person/Person';
 
 // function App() {
@@ -20,9 +19,9 @@ import Person from './Person/Person';
 class App extends Component {
   state = {
     person: [
-      { name: "Monir Ahmed", age: 28 },
-      { name: "Menu", age: 28 },
-      { name: "Max Plank", age: 32 },
+      { id: 1, name: "Monir Ahmed", age: 28 },
+      { id: 2, name: "Menu", age: 28 },
+      { id: 3, name: "Max Plank", age: 32 },
     ],
     showPersons: false
   }
@@ -39,19 +38,45 @@ class App extends Component {
     })
   }
 
-  nameChangeHandler = (event) => {
-    this.setState({
-      person: [
-        { name: "Monir Ahmed", age: 28 },
-        { name: "Jannatun Kumu2.ewu", age: 28 },
-        { name: event.target.value, age: 35 },
-      ]
-    })
+  nameChangeHandler = (event, id) => {
+    const personIndex = this.state.person.findIndex(p => {
+      return p.id === id;
+    });
+
+    const person = {
+      ...this.state.person[personIndex]
+    };
+
+    person.name = event.target.value;
+
+    const persons = [...this.state.person];
+    persons[personIndex] = person;
+
+    this.setState({person: persons});
+
+    // this.setState({
+    //   person: [
+    //     { name: "Monir Ahmed", age: 28 },
+    //     { name: "Jannatun Kumu2.ewu", age: 28 },
+    //     { name: event.target.value, age: 35 },
+    //   ]
+    // })
   }
 
   togglePersonHandler = () => {
     const doesShow = this.state.showPersons;
     this.setState({showPersons: !doesShow});
+  }
+
+  deletePersonHandler = (personIndex) => {
+    /** Copy Reference */
+    // const persons = this.state.person;
+
+    /** Copy Values */
+    const persons = [...this.state.person];
+
+    persons.splice(personIndex, 1);
+    this.setState({person: persons});
   }
 
   render () {
@@ -74,17 +99,14 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          <Person 
-            name={this.state.person[0].name} 
-            age={this.state.person[0].age}></Person>
-          <Person 
-            name={this.state.person[1].name} 
-            age={this.state.person[1].age}></Person>
-          <Person 
-            name={this.state.person[2].name} 
-            age={this.state.person[2].age}
-            click={this.switchNameHandler.bind(this, 'Reverted')}
-            change={this.nameChangeHandler}>Selling properties for my feeding</Person>
+          {this.state.person.map((person, index) => {
+            return <Person 
+              name={person.name} 
+              age={person.age}
+              key={person.id} 
+              change={(event) => this.nameChangeHandler(event, person.id)}
+              deleteClick={this.deletePersonHandler.bind(this, index)}></Person>;
+          })}
         </div>
       );
     }
@@ -99,20 +121,20 @@ class App extends Component {
         <button style={styleTheButton} onClick={this.togglePersonHandler}>Tooggle Person</button>
 
         {
-          this.state.showPersons === true ?
-            <div>
-              <Person 
-                name={this.state.person[0].name} 
-                age={this.state.person[0].age}></Person>
-              <Person 
-                name={this.state.person[1].name} 
-                age={this.state.person[1].age}></Person>
-              <Person 
-                name={this.state.person[2].name} 
-                age={this.state.person[2].age}
-                click={this.switchNameHandler.bind(this, 'Reverted')}
-                change={this.nameChangeHandler}>Selling properties for my feeding</Person>
-            </div> : null
+          // this.state.showPersons === true ?
+          //   <div>
+          //     <Person 
+          //       name={this.state.person[0].name} 
+          //       age={this.state.person[0].age}></Person>
+          //     <Person 
+          //       name={this.state.person[1].name} 
+          //       age={this.state.person[1].age}></Person>
+          //     <Person 
+          //       name={this.state.person[2].name} 
+          //       age={this.state.person[2].age}
+          //       click={this.switchNameHandler.bind(this, 'Reverted')}
+          //       change={this.nameChangeHandler}>Selling properties for my feeding</Person>
+          //   </div> : null
         }
 
         {persons}
