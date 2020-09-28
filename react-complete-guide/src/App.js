@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react';
 import './App.css';
+import person from './Person/Person';
 import Person from './Person/Person';
 
 // function App() {
@@ -68,6 +69,26 @@ class App extends Component {
       font: 'inherit'
     };
 
+    let persons = null;
+
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          <Person 
+            name={this.state.person[0].name} 
+            age={this.state.person[0].age}></Person>
+          <Person 
+            name={this.state.person[1].name} 
+            age={this.state.person[1].age}></Person>
+          <Person 
+            name={this.state.person[2].name} 
+            age={this.state.person[2].age}
+            click={this.switchNameHandler.bind(this, 'Reverted')}
+            change={this.nameChangeHandler}>Selling properties for my feeding</Person>
+        </div>
+      );
+    }
+
     return (
       <div className="App" style={styleTheDiv}>
         <h1>Hi I'm a React App</h1>
@@ -75,7 +96,7 @@ class App extends Component {
         <button style={styleTheButton}
           onClick={() => this.switchNameHandler('Hello World !!!!')}>Switch Name</button>
 
-        <button style={styleTheButton} onClick={this.togglePersonHandler}>Show Div</button>
+        <button style={styleTheButton} onClick={this.togglePersonHandler}>Tooggle Person</button>
 
         {
           this.state.showPersons === true ?
@@ -93,8 +114,8 @@ class App extends Component {
                 change={this.nameChangeHandler}>Selling properties for my feeding</Person>
             </div> : null
         }
-          
-        
+
+        {persons}
       </div>
     );
       
